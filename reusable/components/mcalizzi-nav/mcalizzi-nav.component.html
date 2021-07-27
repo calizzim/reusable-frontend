@@ -1,0 +1,14 @@
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item" *ngFor="let tab of tabs">
+    <a 
+    class="nav-link" 
+    [class.active]="currentTab==tab.templateName"
+    [class.disabled]="tab.disable"
+    (click)="currentTab=tab.templateName"
+    >{{tab.templateName}}</a>
+  </li>
+</ul>
+
+<ng-container *ngFor="let tab of tabs">
+  <ng-container *ngIf="tab.templateName==currentTab" [ngTemplateOutlet]="tab.templateRef"></ng-container>
+</ng-container>

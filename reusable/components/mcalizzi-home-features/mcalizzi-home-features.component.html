@@ -1,0 +1,16 @@
+<div *ngFor="let feature of features; index as i" class="mb-5">
+  <div class="row featurette">
+    <div class="col-md-7" [SizeClass]="['lg','largeMargin']" [class.order-md-2]="i%2==1">
+      <h2 class="featurette-heading">
+        {{ feature.title }} <span class="text-muted">{{ feature.subtitle }}</span>
+      </h2>
+      <p class="lead">
+        {{ feature.text }}
+      </p>
+    </div>
+    <div class="col-md-5">
+      <img class="img-fluid" [src]="feature.imgSrc">
+    </div>
+  </div>
+  <hr class="featurette-divider" *ngIf="i!=features.length-1"/>
+<div>

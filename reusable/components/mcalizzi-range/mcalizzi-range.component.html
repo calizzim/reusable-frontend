@@ -1,0 +1,4 @@
+<div class="card p-2">
+  <label *ngIf="title" class="form-label">{{ title + ': ' + value }}</label>
+  <input type="range" class="form-range" [min]="min" [max]="max" [(ngModel)]="value">
+</div>

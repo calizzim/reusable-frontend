@@ -1,0 +1,11 @@
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>
+
+<ng-container *ngIf="!wrapped">
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</ng-container>
+
+<mcalizzi-collapse *ngIf="wrapped">
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</mcalizzi-collapse>

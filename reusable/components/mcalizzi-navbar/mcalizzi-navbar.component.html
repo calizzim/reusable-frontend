@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand navbar-light bg-light mb-3">
+  <div class="container">
+    <a class="navbar-brand" routerLink="">{{ title }}</a>
+    <div class="navbar-collapse">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item" *ngFor="let routeName of routeNames">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            [routerLink]="routeName"
+            >{{ routeName | varToString: "au" }}</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="!login.is()">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="login"
+            >Login</a>
+        </li>   
+        <li class="nav-item" *ngIf="login.is()">
+          <a
+            class="nav-link"
+            (click)="login.logout()"
+            >Logout</a>
+        </li>   
+      </ul>
+    </div>
+  </div>
+</nav>
