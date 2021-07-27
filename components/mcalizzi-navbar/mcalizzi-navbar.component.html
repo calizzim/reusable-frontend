@@ -11,19 +11,28 @@
             >{{ routeName | varToString: "au" }}</a
           >
         </li>
-        <li class="nav-item" *ngIf="!login.is()">
-          <a
-            class="nav-link"
-            routerLinkActive="active"
-            routerLink="login"
-            >Login</a>
-        </li>   
-        <li class="nav-item" *ngIf="login.is()">
-          <a
-            class="nav-link"
-            (click)="login.logout()"
-            >Logout</a>
-        </li>   
+        <ng-container *ngIf="users">
+          <li class="nav-item" *ngIf="!login.is()">
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              routerLink="signup"
+              >Signup</a>
+          </li>   
+          <li class="nav-item" *ngIf="!login.is()">
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              routerLink="login"
+              >Login</a>
+          </li>   
+          <li class="nav-item" *ngIf="login.is()">
+            <a
+              class="nav-link"
+              (click)="login.logout()"
+              >Logout</a>
+          </li>   
+        </ng-container>
       </ul>
     </div>
   </div>
