@@ -9,10 +9,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./mcalizzi-navbar.component.css']
 })
 export class McalizziNavbarComponent implements OnInit {
-  @Input('title') title
+  @Input('title') title;
+  @Input('co-users') users = true;
+
   constructor(private router:Router, public login:LoginService) { }
   routeNames:string[]
   ngOnInit(): void {
-    this.routeNames = this.router.config.map(v => v.path).filter(v => v && v != 'login')
+    this.routeNames = this.router.config.map(v => v.path).filter(v => !['','login','**','home','signup'].includes(v))
   }
 }
