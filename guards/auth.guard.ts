@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 })
 export class AuthGuard implements CanActivate {
   constructor(
-    private request:BackendRequestService,
+    private http:BackendRequestService,
     private router:Router
     ) {}
   async canActivate(route: ActivatedRouteSnapshot){
-    let { error } = await this.request.get('auth')
+    let { error } = await this.http.get('auth')
     if(error) {
       this.router.navigate(['/login'])
       return false

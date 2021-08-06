@@ -15,13 +15,14 @@ export class BackendRequestService {
   
   async uploadForm(formData,templateName) {
     let URL = 'forms/'+templateName
-    let result = await this.post(URL,formData)
-    if(result.error) console.log(result.error.message)
-    return result
+    if(templateName == 'user') URL = 'auth/signup'
+    if(templateName == 'login') URL = 'auth/login'
+    let data = await this.post(URL,formData)
+    return data
   }
   
   async login(loginData):Promise<boolean> {
-    let URL = 'forms/login'
+    let URL = 'auth/login'
     let result = await this.post(URL,loginData)
     if(result.error) return false
     localStorage.setItem('token', result)
@@ -29,7 +30,8 @@ export class BackendRequestService {
   }
   
   asyncVerify(data,templateName) {
-    let URL = 'forms/asyncVerify/'+templateName
+    let URL = templateName == 'user' ? 
+    'auth/verify' : ('forms/verify/'+templateName)
     return this.post(URL,data)
   }
 

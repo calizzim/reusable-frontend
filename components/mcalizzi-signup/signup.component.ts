@@ -16,7 +16,6 @@ export class McalizziSignupComponent implements OnInit {
   }
 
   async signup(data) {
-    await this.http.uploadForm(data,'user')
     await this.http.login({email: data.email, password: data.password})
   }
 }
