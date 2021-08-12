@@ -13,7 +13,7 @@ export class McalizziFormComponent implements OnInit {
   
   //optional properties
   @Input('fillFromDatabase') fillFromDatabase = true
-  @Input('submitAction') submitAction = 'upload';
+  @Input('upload') upload = true
   @Input('alert') alert = { active: false, message: '' }
   
   //output properties
@@ -29,10 +29,7 @@ export class McalizziFormComponent implements OnInit {
               private login:LoginService) { }
   
   async ngOnInit() {
-    let URL = 'forms/'+this.templateName
-    if(this.templateName == 'user') URL = 'auth/signup'
-    if(this.templateName == 'login') URL = 'auth/login'
-    let form:any = await this.http.get(URL)
+    let form:any = await this.http.getForm(this.templateName)
     this.template = form.template
     if(this.fillFromDatabase && this.login.is()) {
       this.formValues = form.data.native
@@ -93,7 +90,7 @@ export class McalizziFormComponent implements OnInit {
         data[component.name] = this.form.get([group.title, component.name]).value;
       }
     }
-    if(this.submitAction == 'upload') data = await this.http.uploadForm(data,this.templateName)
+    if(this.upload) data = await this.http.uploadForm(data,this.templateName)
     this.formSubmitted.emit(data)
     if(this.template.resetOnSubmit) this.form.reset()
     this.failedToSubmit = false

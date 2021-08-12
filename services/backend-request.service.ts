@@ -13,11 +13,25 @@ export class BackendRequestService {
   constructor(private http:HttpClient) {
   }
   
+  async getReadyForms() {
+    let URL = 'forms/ready'
+    let data = await this.get(URL)
+    return data
+  }
+
   async uploadForm(formData,templateName) {
     let URL = 'forms/'+templateName
     if(templateName == 'user') URL = 'auth/signup'
     if(templateName == 'login') URL = 'auth/login'
     let data = await this.post(URL,formData)
+    return data
+  }
+
+  async getForm(formName) {
+    let URL = 'forms/' + formName
+    if(formName == 'user') URL = 'auth/signup'
+    if(formName == 'login') URL = 'auth/login'
+    let data = await this.get(URL)
     return data
   }
   
@@ -27,6 +41,11 @@ export class BackendRequestService {
     if(result.error) return false
     localStorage.setItem('token', result)
     return true
+  }
+
+  async signup(signupData) {
+    let URL = 'auth/signup'
+    await this.post(URL,signupData)
   }
   
   asyncVerify(data,templateName) {

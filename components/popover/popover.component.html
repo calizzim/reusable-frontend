@@ -1,0 +1,15 @@
+<fa-icon
+  [icon]="questionIcon"
+  (mouseenter)="shown = true"
+  (mouseleave)="shown = false"
+><p #icon></p></fa-icon>
+<div
+  class="card d-inline-block"
+  style="position: absolute; z-index: 100; transform: translateX(10px); max-width: 300px;"
+  *ngIf="shown"
+  @fade
+>
+  <div class="card-body">
+    <ng-content></ng-content>
+  </div>
+</div>

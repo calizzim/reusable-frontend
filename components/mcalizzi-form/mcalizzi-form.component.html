@@ -2,42 +2,116 @@
   <h1 *ngIf="template.showTitle">{{ template.title }}</h1>
   <form [formGroup]="form" class="mb-3">
     <div *ngFor="let formGroup of template.groups">
-      <h5 *ngIf="formGroup.showTitle">{{formGroup.title | varToString:'au' }}</h5>
-      <ng-container *ngFor="let advanced of [false,true]">
-        <advanced-wrapper [wrapped]="advanced" *ngIf="!advanced || containsAdvanced(formGroup)">
+      <h5 *ngIf="formGroup.showTitle">
+        {{ formGroup.title | varToString: "au" }}
+      </h5>
+      <ng-container *ngFor="let advanced of [false, true]">
+        <advanced-wrapper
+          [wrapped]="advanced"
+          *ngIf="!advanced || containsAdvanced(formGroup)"
+        >
           <div class="row" [formGroupName]="formGroup.title">
-            <ng-container *ngFor="let field of formGroup.components" [ngSwitch]="field.type">
+            <ng-container
+              *ngFor="let field of formGroup.components"
+              [ngSwitch]="field.type"
+            >
               <ng-container *ngIf="advanced != !field.advanced">
-                <div *ngSwitchCase="'text'" class="mb-2 col-12 col-md-6 col-xl-4 align-self-center" style="height:100px">
-                  <label class='form-label'>{{ field.name | varToString:'fu' }}</label>
-                  <input [formControlName]="field.name" class="form-control" [type]="field.hidden ? 'password' : 'text'"
-                    [class.is-valid]="isValid(formGroup,field)" [class.is-invalid]="isInvalid(formGroup,field)">
-                  <div class="valid-feedback">{{ getMessage(formGroup,field) }}</div>
-                  <div class="invalid-feedback">{{ getMessage(formGroup,field) }}</div>
-                  <small *ngIf="isNeutral(formGroup,field)" id="emailHelp" class="form-text text-muted mt-1">
-                    {{ field.hint || "please enter " + (field.name | varToString) }}
+                <div
+                  *ngSwitchCase="'text'"
+                  class="mb-2 col-12 col-md-6 col-xl-4 align-self-center"
+                  style="height: 100px"
+                >
+                  <label class="form-label"
+                    >{{ field.name | varToString: "fu" }}
+                    <mcalizzi-info *ngIf="field.hint">
+                      <h5 class='card-title'>{{ field.name | varToString: "fu" }}</h5>
+                      <p class='card-text'>{{ field.hint }}</p>
+                    </mcalizzi-info
+                  ></label>
+                  <input
+                    [formControlName]="field.name"
+                    class="form-control"
+                    [type]="field.hidden ? 'password' : 'text'"
+                    [class.is-valid]="isValid(formGroup, field)"
+                    [class.is-invalid]="isInvalid(formGroup, field)"
+                  />
+                  <div class="valid-feedback">
+                    {{ getMessage(formGroup, field) }}
+                  </div>
+                  <div class="invalid-feedback">
+                    {{ getMessage(formGroup, field) }}
+                  </div>
+                  <small
+                    *ngIf="isNeutral(formGroup, field)"
+                    id="emailHelp"
+                    class="form-text text-muted mt-1"
+                  >
+                    {{
+                      "please enter " + (field.name | varToString)
+                    }}
                   </small>
                 </div>
-                <div *ngSwitchCase="'radio'" style="margin-right: 20px" class="mb-2 col-auto align-self-center">
-                  <div class="form-check is-invalid" *ngFor="let option of field.options">
-                    <input class="form-check-input" type="radio" [formControlName]="field.name" [value]="option">
-                    <label class="form-check-label">{{option | titlecase}}</label>
+                <div
+                  *ngSwitchCase="'radio'"
+                  style="margin-right: 20px"
+                  class="mb-2 col-auto align-self-center"
+                >
+                  <div
+                    class="form-check is-invalid"
+                    *ngFor="let option of field.options"
+                  >
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      [formControlName]="field.name"
+                      [value]="option"
+                    />
+                    <label class="form-check-label">{{
+                      option | titlecase
+                    }}</label>
                   </div>
                 </div>
-                <div *ngSwitchCase="'dropdown'" class="mb-2 col-12 col-md-6 col-xl-4 align-self-start"
-                  style="height: 100px">
-                  <label class='form-label'>{{ field.name | varToString:'fu' }}</label>
-                  <select class="form-select" [formControlName]="field.name"
-                    [class.is-invalid]="isInvalid(formGroup,field)" [class.is-valid]="isValid(formGroup,field)">
-                    <option value=''></option>
-                    <option *ngFor="let option of field.options" [value]="option">{{ option |
-                      titlecase}}</option>
+                <div
+                  *ngSwitchCase="'dropdown'"
+                  class="mb-2 col-12 col-md-6 col-xl-4 align-self-start"
+                  style="height: 100px"
+                >
+                  <label class="form-label">{{
+                    field.name | varToString: "fu"
+                  }}</label>
+                  <select
+                    class="form-select"
+                    [formControlName]="field.name"
+                    [class.is-invalid]="isInvalid(formGroup, field)"
+                    [class.is-valid]="isValid(formGroup, field)"
+                  >
+                    <option value=""></option>
+                    <option
+                      *ngFor="let option of field.options"
+                      [value]="option"
+                    >
+                      {{ option | titlecase }}
+                    </option>
                   </select>
-                  <div class="valid-feedback">{{ getMessage(formGroup,field) }}</div>
-                  <div class="invalid-feedback">{{ (field.name | varToString:'al') + ' ' +
-                    getMessage(formGroup,field) }}</div>
-                  <small *ngIf="isNeutral(formGroup,field)" id="emailHelp" class="form-text text-muted mt-1">
-                    {{ field.hint || "please select " + (field.name | varToString) }}
+                  <div class="valid-feedback">
+                    {{ getMessage(formGroup, field) }}
+                  </div>
+                  <div class="invalid-feedback">
+                    {{
+                      (field.name | varToString: "al") +
+                        " " +
+                        getMessage(formGroup, field)
+                    }}
+                  </div>
+                  <small
+                    *ngIf="isNeutral(formGroup, field)"
+                    id="emailHelp"
+                    class="form-text text-muted mt-1"
+                  >
+                    {{
+                      field.hint ||
+                        "please select " + (field.name | varToString)
+                    }}
                   </small>
                 </div>
               </ng-container>
@@ -46,8 +120,11 @@
         </advanced-wrapper>
       </ng-container>
     </div>
-    <div class="alert alert-danger" *ngIf="alert.active">{{ alert.message }}</div>
-    <button class="btn btn-primary" type="submit" (click)="onSubmit()">{{ template.submitText || 'Submit' |
-      titlecase }}</button>
+    <div class="alert alert-danger" *ngIf="alert.active">
+      {{ alert.message }}
+    </div>
+    <button class="btn btn-primary" type="submit" (click)="onSubmit()">
+      {{ template.submitText || "Submit" | titlecase }}
+    </button>
   </form>
 </ng-container>

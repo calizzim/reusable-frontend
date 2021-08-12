@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { BackendRequestService } from '../../services/backend-request.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,13 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class McalizziSignupComponent implements OnInit {
   
-  constructor(private http:BackendRequestService) { 
+  constructor(private http:BackendRequestService,
+              private router:Router) { 
   }
   
   ngOnInit(): void {
   }
 
   async signup(data) {
-    await this.http.login({email: data.email, password: data.password})
+    await this.http.signup(data)
+    await this.http.login(data)
+    this.router.navigate([''])
   }
 }
