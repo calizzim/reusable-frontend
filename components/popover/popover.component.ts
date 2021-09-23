@@ -9,7 +9,7 @@ import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
   animations: [
     trigger('fade', [
       state('void', style({
-        opacity: 0,
+        opacity: 0
       })),
       transition('void <=> *', [
         animate('.2s')

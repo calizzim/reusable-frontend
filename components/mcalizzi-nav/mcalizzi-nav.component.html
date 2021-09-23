@@ -8,7 +8,6 @@
     >{{tab.templateName}}</a>
   </li>
 </ul>
-
 <ng-container *ngFor="let tab of tabs">
-  <ng-container *ngIf="tab.templateName==currentTab" [ngTemplateOutlet]="tab.templateRef"></ng-container>
+  <div *ngIf="tab.templateName==currentTab" [ngTemplateOutlet]="tab.templateRef"></div>
 </ng-container>

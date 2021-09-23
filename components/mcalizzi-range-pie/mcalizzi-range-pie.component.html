@@ -1,1 +1,13 @@
-<p>mcalizzi-range-pie works!</p>
+<mcalizzi-piechart
+[cr-data]="{
+  xvalues: data.xvalues,
+  yvalues: data.yvalues[index]
+}"
+[co-yaxis-pipe]="yaxisPipe"
+></mcalizzi-piechart>
+<mcalizzi-range
+[cr-min]="rangeMin"
+[cr-max]="rangeMin + data.yvalues.length - 1"
+[(cr-value)]="rangeValue"
+[cr-title]="rangeTitle"
+></mcalizzi-range>

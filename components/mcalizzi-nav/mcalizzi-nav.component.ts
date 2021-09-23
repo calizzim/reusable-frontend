@@ -1,10 +1,11 @@
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ApplyRefDirective } from '../../directives/apply-ref.directive';
 import { Component, ContentChild, Input, OnInit, ElementRef, TemplateRef, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
 
 @Component({
   selector: 'mcalizzi-nav',
   templateUrl: './mcalizzi-nav.component.html',
-  styleUrls: ['./mcalizzi-nav.component.css']
+  styleUrls: ['./mcalizzi-nav.component.css'],
 })
 export class McalizziNavComponent implements OnInit, AfterContentInit {
   @ContentChildren(ApplyRefDirective) tabs:QueryList<ApplyRefDirective>
@@ -19,6 +20,12 @@ export class McalizziNavComponent implements OnInit, AfterContentInit {
   ngAfterContentInit() {
     this.tabNames = this.tabs.map(v => v.templateName)
     this.currentTab = this.tabNames[0]
+  }
+
+  navigate(tabname) {
+    if(this.tabNames.includes(tabname)) {
+      this.currentTab = tabname
+    }
   }
 
 }

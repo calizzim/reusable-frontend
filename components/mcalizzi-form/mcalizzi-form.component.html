@@ -1,4 +1,4 @@
-<ng-container *ngIf="loaded">
+<div *ngIf="loaded" @fade>
   <h1 *ngIf="template.showTitle">{{ template.title }}</h1>
   <form [formGroup]="form" class="mb-3">
     <div *ngFor="let formGroup of template.groups">
@@ -127,4 +127,8 @@
       {{ template.submitText || "Submit" | titlecase }}
     </button>
   </form>
-</ng-container>
+  <ng-container *ngIf="templateInitialized && properties && properties.computed">
+    <ng-container [ngTemplateOutlet]='computedTemplate'></ng-container>
+  </ng-container>
+</div>
+<div class="mb-5"></div>

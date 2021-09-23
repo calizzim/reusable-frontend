@@ -1,4 +1,4 @@
 <div style="position: relative; display: block" class="card mb-1 p-1">
   <canvas #chart></canvas>
-  <div class="text-center"><strong>{{totalTitle}}: {{ yaxisPipe.transform(dataTotal) }}</strong></div>
+  <div class="text-center"><strong>{{totalTitle}}: {{ yaxisPipe ? yaxisPipe.transform(dataTotal) : dataTotal }}</strong></div>
 </div>
