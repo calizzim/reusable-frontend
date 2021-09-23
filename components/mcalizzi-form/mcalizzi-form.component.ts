@@ -59,12 +59,12 @@ export class McalizziFormComponent implements OnInit, AfterViewInit {
 
     let form: any = await this.http.getForm(this.templateName);
     this.template = form.template;
-    if (form.data.native) this.properties = form.data
+    if (form.data && form.data.native) this.properties = form.data
     let formValues = this.properties ? this.properties.native : null
     for (let group of this.template.groups) {
       let formGroup = new FormGroup({});
       for (let component of group.components) {
-        let value;
+        let value = '';
         if (component.defaultValue) value = component.defaultValue;
         if (formValues && formValues[component.name])
           value = formValues[component.name];

@@ -57,16 +57,19 @@
                   class="mb-2 col-auto align-self-center"
                 >
                   <div
-                    class="form-check is-invalid"
+                    class="form-check"
                     *ngFor="let option of field.options"
                   >
                     <input
                       class="form-check-input"
+                      [ngStyle]="isInvalid(formGroup, field) ? { 'border-color':'red' } : {}"
                       type="radio"
                       [formControlName]="field.name"
                       [value]="option"
                     />
-                    <label class="form-check-label">{{
+                    <label 
+
+                    class="form-check-label">{{
                       option | titlecase
                     }}</label>
                   </div>
@@ -127,7 +130,7 @@
       {{ template.submitText || "Submit" | titlecase }}
     </button>
   </form>
-  <ng-container *ngIf="templateInitialized && properties && properties.computed">
+  <ng-container *ngIf="templateInitialized && properties">
     <ng-container [ngTemplateOutlet]='computedTemplate'></ng-container>
   </ng-container>
 </div>
