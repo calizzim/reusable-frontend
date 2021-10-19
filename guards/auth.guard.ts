@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
   async canActivate(route: ActivatedRouteSnapshot){
     let { error } = await this.http.get('auth')
     if(error) {
-      this.router.navigate(['/login'])
+      this.router.navigate(['/signup'])
       return false
     }
     return true

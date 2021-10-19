@@ -66,7 +66,7 @@ export class McalizziFormComponent implements OnInit, AfterViewInit {
       for (let component of group.components) {
         let value = '';
         if (component.defaultValue) value = component.defaultValue;
-        if (formValues && formValues[component.name])
+        if (formValues && formValues[component.name] != null)
           value = formValues[component.name];
         let formControl = new FormControl(
           value,
