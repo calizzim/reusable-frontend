@@ -66,6 +66,12 @@ export class BackendRequestService {
     return this.handle(result)
   }
 
+  delete(URL):Promise<any> {
+    let token = localStorage.getItem('token') || ''
+    let result = this.http.delete(this.backendURL+URL,{headers:{token}})
+    return this.handle(result)
+  }
+
   handle(obs:Observable<any>):Promise<any> {
     let result:Promise<any> = obs
     .pipe(

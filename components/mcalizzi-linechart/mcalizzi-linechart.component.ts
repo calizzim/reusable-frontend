@@ -29,6 +29,7 @@ export class McalizziLinechartComponent implements AfterViewInit {
   @Input('co-xaxis') xaxis
   @Input('co-yaxis') yaxis
   @Input('co-tooltip-prefix') tooltipPrefix
+  @Input('co-begin-at-zero') beginAtZero = false
 
   @ViewChild('chart') private chartRef: ElementRef;
   private chart: Chart;
@@ -100,9 +101,10 @@ export class McalizziLinechartComponent implements AfterViewInit {
               text: this.yaxis
             },
             ticks: {
-              callback: this.formatTicks
-            }
-          }
+              callback: this.formatTicks,
+            },
+            beginAtZero: this.beginAtZero
+          },
         }
       }
     });
