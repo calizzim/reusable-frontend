@@ -15,6 +15,9 @@ export class McalizziNavbarComponent implements OnInit {
   constructor(private router:Router, public login:LoginService) { }
   routeNames:string[]
   ngOnInit(): void {
-    this.routeNames = this.router.config.map(v => v.path).filter(v => !['','login','**','home','signup'].includes(v))
+    this.routeNames = this.router.config
+    .filter(v => !v.data || !v.data.noShow)
+    .map(v => v.path)
+    .filter(p => !['','login','**','home','signup'].includes(p))
   }
 }
